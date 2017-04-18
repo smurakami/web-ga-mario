@@ -51,10 +51,6 @@
   stage = null;
 
   Stage = (function() {
-    Stage.width = stageData[0].length;
-
-    Stage.height = stageData.length;
-
     function Stage() {
       stage = this;
       this.data = stageData;
@@ -103,7 +99,7 @@
       unit = Game.unit;
       x = Math.floor(x / unit);
       y = Math.floor(y / unit);
-      if (x < 0 || x >= Stage.width || y < 0 || y >= Stage.height) {
+      if (x < 0 || x >= this.data[0].length || y < 0 || y >= this.data.length) {
         return 0;
       }
       return this.data[y][x];
@@ -170,6 +166,9 @@
       this.prev_up = false;
       this.down = false;
       this.color = '#e64141';
+      this.max_x = 0;
+      this.deadCounter = 0;
+      this.isDead = false;
     }
 
     Mario.prototype.draw = function() {
@@ -185,7 +184,19 @@
 
     Mario.prototype.update = function() {
       var centerBottom, centerTop, leftBottom, leftTop, next, rightBottom, rightTop;
+      if (this.pos.x > this.max_x) {
+        this.max_x = this.pos.x;
+        this.deadCounter = 0;
+      } else {
+        this.deadCounter++;
+      }
+      if (this.deadCounter > 150) {
+        this.isDead = true;
+      }
       if (this.pos.y > Stage.height * Game.unit) {
+        this.isDead = true;
+      }
+      if (this.isDead) {
         return;
       }
       if (this.isJumping) {
@@ -358,12 +369,26 @@
     }
 
     GA.prototype.update = function() {
-      var gene, j, len, max, ref;
+      var finished, gene, j, k, len, len1, max, ref, ref1, sum;
       max = Math.min(this.counter, this.size - 1);
-      ref = this.current.slice(0, max);
+      ref = this.current.slice(0, +max + 1 || 9e9);
       for (j = 0, len = ref.length; j < len; j++) {
         gene = ref[j];
         gene.update();
+      }
+      finished = true;
+      sum = 0;
+      ref1 = this.current;
+      for (k = 0, len1 = ref1.length; k < len1; k++) {
+        gene = ref1[k];
+        sum += gene.mario.isDead;
+        if (!gene.mario.isDead) {
+          finished = false;
+        }
+      }
+      if (finished) {
+        this.nextGenerateion();
+        return;
       }
       return this.counter++;
     };
@@ -413,7 +438,8 @@
         }
         next.push(child);
       }
-      return this.current = next;
+      this.current = next;
+      return this.counter = 0;
     };
 
     GA.prototype.roulette = function(scores) {
@@ -538,7 +564,7 @@
     };
 
     Game.prototype.draw = function() {
-      this.context.clearRect(0, 0, Game.width, Game.height);
+      this.context.clearRect(0, 0, Game.width * 2, Game.height * 2);
       this.stage.draw();
       if (Game.playerEnabled) {
         this.mario.draw();

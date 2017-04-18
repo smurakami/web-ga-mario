@@ -58,8 +58,8 @@ stageData = [
 
 stage = null
 class Stage
-  @width: stageData[0].length
-  @height: stageData.length
+  # @width: stageData[0].length
+  # @height: stageData.length
   constructor: () ->
     stage = @
     @data = stageData
@@ -91,7 +91,7 @@ class Stage
     unit = Game.unit
     x = Math.floor(x / unit)
     y = Math.floor(y / unit)
-    if x < 0 || x >= Stage.width || y < 0 || y >= Stage.height
+    if x < 0 || x >= @data[0].length || y < 0 || y >= @data.length
       return 0
     return @data[y][x]
 
@@ -138,6 +138,10 @@ class Mario
 
     @color = '#e64141'
 
+    @max_x = 0
+    @deadCounter = 0
+    @isDead = false
+
   draw: ->
     context = game.context
     context.fillStyle = @color
@@ -148,7 +152,19 @@ class Mario
     context.fillRect x, y, @size.x, @size.y
 
   update: ->
+    if @pos.x > @max_x
+      @max_x = @pos.x
+      @deadCounter = 0
+    else
+      @deadCounter++
+
+    if @deadCounter > 150
+      @isDead = true
+
     if @pos.y > Stage.height * Game.unit
+      @isDead = true
+
+    if @isDead
       return
 
     if @isJumping
@@ -296,8 +312,19 @@ class GA
   update: ->
     max = Math.min(@counter, @size-1)
 
-    for gene in @current[0...max]
+    for gene in @current[0..max]
       gene.update()
+
+    finished = true
+    sum = 0
+    for gene in @current
+      sum += gene.mario.isDead
+      if !gene.mario.isDead
+        finished = false
+
+    if finished
+      @nextGenerateion()
+      return
 
     @counter++
 
@@ -327,6 +354,7 @@ class GA
       next.push(child)
 
     @current = next
+    @counter = 0
 
   roulette: (scores) ->
     min = Math.min.apply(Math, scores)
@@ -417,7 +445,6 @@ class Game
   update: ->
     if Game.playerEnabled
       @mario.update()
-    # @gene.update()
 
     if @left
       @pos.x -= Game.unit / 40
@@ -428,7 +455,7 @@ class Game
     @ga.update()
 
   draw: ->
-    @context.clearRect(0, 0, Game.width, Game.height)
+    @context.clearRect(0, 0, Game.width * 2, Game.height * 2)
     @stage.draw()
     if Game.playerEnabled
       @mario.draw()
