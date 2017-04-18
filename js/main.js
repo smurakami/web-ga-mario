@@ -178,13 +178,17 @@
         this.v.x = 0;
         next.x = Math.floor(next.x / Game.unit + 1) * Game.unit - this.size.x / 2;
       }
-      if (stage.at(leftTop).isField() || stage.at(rightTop).isField() || stage.at(centerTop).isField()) {
-        console.log('top');
+      leftTop = next.add(Point(-this.size.x / 2 + 1, -this.size.y / 2));
+      rightTop = next.add(Point(this.size.x / 2 - 1, -this.size.y / 2));
+      centerTop = next.add(Point(0, -this.size.y / 2));
+      leftBottom = next.add(Point(-this.size.x / 2 + 1, this.size.y / 2));
+      rightBottom = next.add(Point(this.size.x / 2 - 1, this.size.y / 2));
+      centerBottom = next.add(Point(0, this.size.y / 2));
+      if (stage.at(centerTop).isField()) {
         this.v.y = 0;
         next.y = Math.floor(next.y / Game.unit) * Game.unit + this.size.y / 2;
       }
       if (stage.at(leftBottom).isField() || stage.at(rightBottom).isField() || stage.at(centerBottom).isField()) {
-        console.log('bottom');
         this.v.y = 0;
         next.y = Math.floor(next.y / Game.unit) * Game.unit + this.size.y / 2;
         this.isJumping = false;

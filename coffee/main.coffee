@@ -141,16 +141,21 @@ class Mario
     if stage.at(next.x - @size.x/2, next.y).isField()
       @v.x = 0
       next.x = Math.floor(next.x / Game.unit + 1) * Game.unit - this.size.x/2
+      
+    leftTop = next.add(Point(-@size.x/2 + 1, -@size.y/2))
+    rightTop = next.add(Point(@size.x/2 - 1, -@size.y/2))
+    centerTop = next.add(Point(0, -@size.y/2))
+    leftBottom = next.add(Point(-@size.x/2 + 1, @size.y/2))
+    rightBottom = next.add(Point(@size.x/2 - 1, @size.y/2))
+    centerBottom = next.add(Point(0, @size.y/2))
 
     # 上衝突判定
-    if stage.at(leftTop).isField() or stage.at(rightTop).isField() or stage.at(centerTop).isField()
-      console.log 'top'
+    if stage.at(centerTop).isField()
       @v.y = 0
       next.y = Math.floor(next.y / Game.unit) * Game.unit + this.size.y/2
 
     # 下衝突判定
     if stage.at(leftBottom).isField() or stage.at(rightBottom).isField() or stage.at(centerBottom).isField()
-      console.log 'bottom'
       @v.y = 0
       next.y = Math.floor(next.y / Game.unit) * Game.unit + this.size.y/2
       @isJumping = false
