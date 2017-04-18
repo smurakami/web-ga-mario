@@ -61,7 +61,13 @@
       context = game.context;
       unit = Game.unit;
       start = Math.floor(game.pos.x / Game.unit);
+      if (start < 0) {
+        start = 0;
+      }
       end = start + 27;
+      if (end >= this.cols()) {
+        end = this.cols() - 1;
+      }
       ref = this.data;
       results = [];
       for (yi = j = 0, len = ref.length; j < len; yi = ++j) {
@@ -88,6 +94,10 @@
         })());
       }
       return results;
+    };
+
+    Stage.prototype.cols = function() {
+      return this.data[0].length;
     };
 
     Stage.prototype.at = function(x, y) {

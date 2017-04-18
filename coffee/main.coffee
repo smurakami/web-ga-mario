@@ -68,7 +68,11 @@ class Stage
     context = game.context
     unit = Game.unit
     start = Math.floor(game.pos.x / Game.unit)
+    if start < 0
+      start = 0
     end = start + 27
+    if end >= @cols()
+      end = @cols() - 1
     for row, yi in @data
       for xi in [start...end]
         val = row[xi]
@@ -83,6 +87,9 @@ class Stage
         y -= game.pos.y
         context.fillRect x, y, unit, unit
         context.strokeRect x, y, unit, unit
+
+  cols: ->
+    @data[0].length
 
   at: (x, y) ->
     if x.constructor == Point
