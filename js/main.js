@@ -18,7 +18,7 @@
 
   })();
 
-  stageData = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]];
+  stageData = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]];
 
   stage = null;
 
@@ -146,7 +146,7 @@
     };
 
     Mario.prototype.update = function() {
-      var centerBottom, leftBottom, next, rightBottom;
+      var centerBottom, centerTop, leftBottom, leftTop, next, rightBottom, rightTop;
       if (this.isJumping) {
         this.v.y += Game.gravity;
       }
@@ -164,21 +164,27 @@
         this.isJumping = true;
       }
       next = this.pos.add(this.v);
+      leftTop = next.add(Point(-this.size.x / 2 + 1, -this.size.y / 2));
+      rightTop = next.add(Point(this.size.x / 2 - 1, -this.size.y / 2));
+      centerTop = next.add(Point(0, -this.size.y / 2));
+      leftBottom = next.add(Point(-this.size.x / 2 + 1, this.size.y / 2));
+      rightBottom = next.add(Point(this.size.x / 2 - 1, this.size.y / 2));
+      centerBottom = next.add(Point(0, this.size.y / 2));
       if (stage.at(next.x + this.size.x / 2, next.y).isField()) {
         this.v.x = 0;
         next.x = Math.floor(next.x / Game.unit) * Game.unit + this.size.x / 2;
       }
-      leftBottom = next.add(Point(-this.size.x / 2, this.size.y));
-      rightBottom = next.add(Point(this.size.x / 2, this.size.y));
-      centerBottom = next.add(Point(0, this.size.y));
       if (stage.at(next.x - this.size.x / 2, next.y).isField()) {
         this.v.x = 0;
         next.x = Math.floor(next.x / Game.unit + 1) * Game.unit - this.size.x / 2;
       }
-      leftBottom = next.add(Point(-this.size.x / 2 + 1, this.size.y / 2));
-      rightBottom = next.add(Point(this.size.x / 2 - 1, this.size.y / 2));
-      centerBottom = next.add(Point(0, this.size.y / 2));
+      if (stage.at(leftTop).isField() || stage.at(rightTop).isField() || stage.at(centerTop).isField()) {
+        console.log('top');
+        this.v.y = 0;
+        next.y = Math.floor(next.y / Game.unit) * Game.unit + this.size.y / 2;
+      }
       if (stage.at(leftBottom).isField() || stage.at(rightBottom).isField() || stage.at(centerBottom).isField()) {
+        console.log('bottom');
         this.v.y = 0;
         next.y = Math.floor(next.y / Game.unit) * Game.unit + this.size.y / 2;
         this.isJumping = false;
