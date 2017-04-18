@@ -46,14 +46,14 @@
 
   })();
 
-  stageData = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]];
+  stageData = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1]];
 
   stage = null;
 
   Stage = (function() {
-    Stage.width = 20;
+    Stage.width = stageData[0].length;
 
-    Stage.height = 10;
+    Stage.height = stageData.length;
 
     function Stage() {
       stage = this;
@@ -61,26 +61,32 @@
     }
 
     Stage.prototype.draw = function() {
-      var context, j, len, ref, results, row, unit, val, x, y;
+      var context, end, j, len, ref, results, row, start, unit, val, x, xi, y, yi;
       context = game.context;
       unit = Game.unit;
+      start = Math.floor(game.pos.x / Game.unit);
+      end = start + 27;
       ref = this.data;
       results = [];
-      for (y = j = 0, len = ref.length; j < len; y = ++j) {
-        row = ref[y];
+      for (yi = j = 0, len = ref.length; j < len; yi = ++j) {
+        row = ref[yi];
         results.push((function() {
-          var k, len1, results1;
+          var k, ref1, ref2, results1;
           results1 = [];
-          for (x = k = 0, len1 = row.length; k < len1; x = ++k) {
-            val = row[x];
+          for (xi = k = ref1 = start, ref2 = end; ref1 <= ref2 ? k < ref2 : k > ref2; xi = ref1 <= ref2 ? ++k : --k) {
+            val = row[xi];
             if (val === 0) {
               context.fillStyle = '#7ecef4';
             } else if (val === 1) {
               context.fillStyle = '#7e6b5a';
               context.strokeStyle = 'black';
             }
-            context.fillRect(x * unit, y * unit, unit, unit);
-            results1.push(context.strokeRect(x * unit, y * unit, unit, unit));
+            x = xi * unit;
+            y = yi * unit;
+            x -= game.pos.x;
+            y -= game.pos.y;
+            context.fillRect(x, y, unit, unit);
+            results1.push(context.strokeRect(x, y, unit, unit));
           }
           return results1;
         })());
@@ -154,7 +160,7 @@
 
   Mario = (function() {
     function Mario() {
-      this.pos = Point.atIndex(0, 0);
+      this.pos = Point.atIndex(2, 2);
       this.v = Point();
       this.size = Point(Game.unit, Game.unit);
       this.isJumping = true;
@@ -172,25 +178,30 @@
       context.fillStyle = this.color;
       x = this.pos.x - this.size.x / 2;
       y = this.pos.y - this.size.y / 2;
+      x -= game.pos.x;
+      y -= game.pos.y;
       return context.fillRect(x, y, this.size.x, this.size.y);
     };
 
     Mario.prototype.update = function() {
       var centerBottom, centerTop, leftBottom, leftTop, next, rightBottom, rightTop;
+      if (this.pos.y > Stage.height * Game.unit) {
+        return;
+      }
       if (this.isJumping) {
         this.v.y += Game.gravity;
       }
       if (this.right && this.left) {
         this.v.x = 0;
       } else if (this.right) {
-        this.v.x = 2;
+        this.v.x = Game.unit / 40;
       } else if (this.left) {
-        this.v.x = -2;
+        this.v.x = -Game.unit / 40;
       } else {
         this.v.x = 0;
       }
       if (this.up && !this.isJumping) {
-        this.v.y = -5;
+        this.v.y = -Game.unit / 16;
         this.isJumping = true;
       }
       next = this.pos.add(this.v);
@@ -370,7 +381,12 @@
     };
 
     GA.prototype.getScore = function(gene) {
-      return gene.mario.pos.x;
+      var score;
+      score = gene.mario.pos.x;
+      if (score < 0) {
+        score = 0;
+      }
+      return score * score;
     };
 
     GA.prototype.nextGenerateion = function() {
@@ -481,6 +497,9 @@
         this.mario = new Mario();
       }
       this.ga = new GA();
+      this.pos = Point();
+      this.left = false;
+      this.right = false;
       setInterval((function(_this) {
         return function() {
           _this.update();
@@ -509,6 +528,12 @@
       if (Game.playerEnabled) {
         this.mario.update();
       }
+      if (this.left) {
+        this.pos.x -= Game.unit / 40;
+      }
+      if (this.right) {
+        this.pos.x += Game.unit / 40;
+      }
       return this.ga.update();
     };
 
@@ -522,12 +547,14 @@
     };
 
     Game.prototype.onLeft = function() {
+      this.left = true;
       if (Game.playerEnabled) {
         return this.mario.left = true;
       }
     };
 
     Game.prototype.onRight = function() {
+      this.right = true;
       if (Game.playerEnabled) {
         return this.mario.right = true;
       }
@@ -546,12 +573,14 @@
     };
 
     Game.prototype.offLeft = function() {
+      this.left = false;
       if (Game.playerEnabled) {
         return this.mario.left = false;
       }
     };
 
     Game.prototype.offRight = function() {
+      this.right = false;
       if (Game.playerEnabled) {
         return this.mario.right = false;
       }

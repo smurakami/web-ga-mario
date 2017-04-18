@@ -44,22 +44,22 @@ class Util
 
 
 stageData = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-  [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-  [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1,],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, ],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, ],
 ]
 
 stage = null
 class Stage
-  @width: 20
-  @height: 10
+  @width: stageData[0].length
+  @height: stageData.length
   constructor: () ->
     stage = @
     @data = stageData
@@ -67,15 +67,22 @@ class Stage
   draw: ->
     context = game.context
     unit = Game.unit
-    for row, y in @data
-      for val, x in row
+    start = Math.floor(game.pos.x / Game.unit)
+    end = start + 27
+    for row, yi in @data
+      for xi in [start...end]
+        val = row[xi]
         if val == 0
           context.fillStyle = '#7ecef4'
         else if val == 1
           context.fillStyle = '#7e6b5a'
           context.strokeStyle = 'black'
-        context.fillRect x * unit, y * unit, unit, unit
-        context.strokeRect x * unit, y * unit, unit, unit
+        x = xi * unit
+        y = yi * unit
+        x -= game.pos.x
+        y -= game.pos.y
+        context.fillRect x, y, unit, unit
+        context.strokeRect x, y, unit, unit
 
   at: (x, y) ->
     if x.constructor == Point
@@ -118,7 +125,7 @@ class Point
 
 class Mario
   constructor: ->
-    @pos = Point.atIndex(0, 0)
+    @pos = Point.atIndex(2, 2)
     @v = Point()
     @size = Point(Game.unit, Game.unit)
     @isJumping = true
@@ -136,23 +143,28 @@ class Mario
     context.fillStyle = @color
     x = @pos.x - @size.x / 2
     y = @pos.y - @size.y / 2
+    x -= game.pos.x
+    y -= game.pos.y
     context.fillRect x, y, @size.x, @size.y
 
   update: ->
+    if @pos.y > Stage.height * Game.unit
+      return
+
     if @isJumping
       @v.y += Game.gravity
 
     if @right and @left
       @v.x = 0
     else if @right
-      @v.x = 2
+      @v.x = Game.unit / 40
     else if @left
-      @v.x = -2
+      @v.x = -Game.unit / 40
     else
       @v.x = 0
 
     if @up and !@isJumping
-      @v.y = -5
+      @v.y = - Game.unit / 16
       @isJumping = true
 
     next = @pos.add(@v)
@@ -296,7 +308,10 @@ class GA
 
 
   getScore: (gene) ->
-    return gene.mario.pos.x
+    score = gene.mario.pos.x
+    if score < 0
+      score = 0
+    return score * score
 
   nextGenerateion: ->
     scores = (@getScore(gene) for gene in @current)
@@ -372,6 +387,11 @@ class Game
     # @gene = new Gene()
     @ga = new GA()
 
+    @pos = Point()
+
+    @left = false
+    @right = false
+
     setInterval =>
       @update()
       @draw()
@@ -398,6 +418,13 @@ class Game
     if Game.playerEnabled
       @mario.update()
     # @gene.update()
+
+    if @left
+      @pos.x -= Game.unit / 40
+
+    if @right
+      @pos.x += Game.unit / 40
+
     @ga.update()
 
   draw: ->
@@ -409,9 +436,11 @@ class Game
     @ga.draw()
 
   onLeft: ->
+    @left = true
     if Game.playerEnabled
       @mario.left = true
   onRight: ->
+    @right = true
     if Game.playerEnabled
       @mario.right = true
   onUp: ->
@@ -421,9 +450,11 @@ class Game
     if Game.playerEnabled
       @mario.down = true
   offLeft: ->
+    @left = false
     if Game.playerEnabled
       @mario.left = false
   offRight: ->
+    @right = false
     if Game.playerEnabled
       @mario.right = false
   offUp: ->
