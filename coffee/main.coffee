@@ -13,6 +13,35 @@ class Util
 
     return ratio
 
+  @randomBool: ->
+    return Math.random() > 0.5
+
+  @randomInt: (max) ->
+    return Math.floor(Math.random() * max)
+
+  @randomColor: ->
+    color_elem = [
+      255,
+      Util.randomInt(255),
+      0,
+    ]
+    color_r_index = Util.randomInt(3)
+    r_bin = Util.randomInt(2)
+    color_g_index = (color_r_index + 1 +  r_bin) % 3
+    color_b_index = (color_r_index + 1 + !r_bin) % 3
+    # // openFrameworksの色構造体に色を格納
+    # // color.set(red, green, blue);で色を作成できる
+    # ofColor color;
+    # color.set(color_elem[color_r_index], color_elem[color_g_index], color_elem[color_b_index]);
+    return "rgb(#{color_elem[color_r_index]}, #{color_elem[color_g_index]}, #{color_elem[color_b_index]})"
+
+  @sum: (array) ->
+    sum = 0
+    for val in array
+      sum += val
+    return sum
+
+
 
 stageData = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -23,7 +52,7 @@ stageData = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
   [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1,],
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,],
 ]
 
@@ -97,11 +126,14 @@ class Mario
     @right = false
     @left = false
     @up = false
+    @prev_up = false
     @down = false
+
+    @color = '#e64141'
 
   draw: ->
     context = game.context
-    context.fillStyle = '#e64141'
+    context.fillStyle = @color
     x = @pos.x - @size.x / 2
     y = @pos.y - @size.y / 2
     context.fillRect x, y, @size.x, @size.y
@@ -141,7 +173,7 @@ class Mario
     if stage.at(next.x - @size.x/2, next.y).isField()
       @v.x = 0
       next.x = Math.floor(next.x / Game.unit + 1) * Game.unit - this.size.x/2
-      
+
     leftTop = next.add(Point(-@size.x/2 + 1, -@size.y/2))
     rightTop = next.add(Point(@size.x/2 - 1, -@size.y/2))
     centerTop = next.add(Point(0, -@size.y/2))
@@ -164,6 +196,163 @@ class Mario
       @isJumping = true
 
     @pos = next
+    @prev_up = @up
+
+
+class GeneUnit
+  constructor: (left, up, right) ->
+    if this == window
+      return new GeneUnit(left, up, right)
+    @left = left
+    @up = up
+    @right = right
+
+  copy: ->
+    return GeneUnit(@left, @up, @right)
+
+
+  @random: ->
+    return GeneUnit(Util.randomBool(), Util.randomBool(), Util.randomBool())
+
+
+class Gene
+  # 遺伝子設計
+  # 入力
+  # 2 3 4
+  # 1 x 5
+  # 0   6
+  # 
+  # 7: 接地情報
+  # 
+  # 出力
+  # left up rightの三桁 -> 0 - 7
+
+  constructor: ->
+    window.gene = @
+    @data = (GeneUnit.random() for i in [0...Math.pow(2, 7)])
+    @mario = new Mario()
+    @mario.color = Util.randomColor()
+
+  copy: ->
+    gene = new Gene()
+    gene.data = (unit.copy() for unit in @data)
+    return gene
+
+  getMap: ->
+    pos = @mario.pos
+    size = @mario.size
+
+    leftBottom  = stage.at(pos.x - size.x, pos.y + size.y)
+    leftCenter  = stage.at(pos.x - size.x, pos.y)
+    leftTop     = stage.at(pos.x - size.x, pos.y - size.y)
+    centerTop   = stage.at(pos.x, pos.y - size.y)
+    rightTop    = stage.at(pos.x + size.x, pos.y - size.y)
+    rightCenter = stage.at(pos.x + size.x, pos.y)
+    rightBottom = stage.at(pos.x + size.x, pos.y + size.y)
+
+    array = [leftBottom, leftCenter, leftTop, centerTop, rightTop, rightCenter, rightBottom]
+    # console.log array
+    sum = 0
+    for val in array
+      sum = sum * 2 + val
+    return sum
+
+  update: ->
+    # console.log "map: #{@getMap()}"
+    val = @getMap()
+    # console.log(val)
+    geneunit = @data[val]
+    if not geneunit?
+      console.log val
+      console.log ('undefiend')
+      return
+    @mario.up = geneunit.up
+    @mario.left = geneunit.left
+    @mario.right = geneunit.right
+    @mario.update()
+
+  draw: ->
+    @mario.draw()
+
+
+class GA
+  constructor: ->
+    @size = 128
+    @current = (new Gene for i in [0...@size])
+    @counter = 0
+
+  update: ->
+    max = Math.min(@counter, @size-1)
+
+    for gene in @current[0...max]
+      gene.update()
+
+    @counter++
+
+  draw: ->
+    max = Math.min(@counter, @size-1)
+    for gene in @current[0...max]
+      gene.draw()
+
+
+  getScore: (gene) ->
+    return gene.mario.pos.x
+
+  nextGenerateion: ->
+    scores = (@getScore(gene) for gene in @current)
+    next = []
+    for i in [0...@size]
+      dice = Util.randomInt(100)
+      if dice < 70
+        child = @cross(@roulette(scores), @roulette(scores))
+      else if dice < 96
+        child = @copy(@roulette(scores))
+      else
+        child = @mutate(@roulette(scores))
+      next.push(child)
+
+    @current = next
+
+  roulette: (scores) ->
+    min = Math.min.apply(Math, scores)
+    scores = (score - min for score in scores)
+    sum = Util.sum(scores)
+    dice = Math.random() * sum
+
+    current = 0
+
+    for score, index in scores
+      current += score
+      if current > dice
+        return @current[index]
+    console.log 'ルーレットミス'
+    return ksdfa
+
+  mutate: (gene) ->
+    a = Util.randomInt(gene.data.length)
+    b = Util.randomInt(gene.data.length)
+    begin = Math.min(a, b)
+    end = Math.max(a, b) + 1
+
+    child = new Gene()
+
+    for i in [begin..end]
+      child.data[i] = GeneUnit.random()
+
+    return child
+
+  cross: (a, b) ->
+    x = Util.randomInt(gene.data.length)
+
+    child = new Gene()
+    for i in [0...x]
+      child.data[i] = a.data[i].copy()
+    for i in [x...child.data.length]
+      child.data[i] = b.data[i].copy()
+    return child
+
+  copy: (gene) ->
+    return gene.copy()
 
 
 game = null
@@ -172,12 +361,16 @@ class Game
   @width: 1000
   @height: 400
   @gravity: 0.03
+  @playerEnabled: false
 
   constructor: ->
     game = @
     @initCanvas()
     @stage = new Stage()
-    @mario = new Mario()
+    if Game.playerEnabled
+      @mario = new Mario()
+    # @gene = new Gene()
+    @ga = new GA()
 
     setInterval =>
       @update()
@@ -202,45 +395,70 @@ class Game
     @context = @canvas.getContext('2d')
 
   update: ->
-    @mario.update()
+    if Game.playerEnabled
+      @mario.update()
+    # @gene.update()
+    @ga.update()
 
   draw: ->
     @context.clearRect(0, 0, Game.width, Game.height)
     @stage.draw()
-    @mario.draw()
+    if Game.playerEnabled
+      @mario.draw()
+    # @gene.draw()
+    @ga.draw()
 
-  onLeft: -> @mario.left = true
-  onRight: -> @mario.right = true
-  onUp: -> @mario.up = true
-  onDown: -> @mario.down = true
-  offLeft: -> @mario.left = false
-  offRight: -> @mario.right = false
-  offUp: -> @mario.up = false
-  offDown: -> @mario.down = false
+  onLeft: ->
+    if Game.playerEnabled
+      @mario.left = true
+  onRight: ->
+    if Game.playerEnabled
+      @mario.right = true
+  onUp: ->
+    if Game.playerEnabled
+      @mario.up = true
+  onDown: ->
+    if Game.playerEnabled
+      @mario.down = true
+  offLeft: ->
+    if Game.playerEnabled
+      @mario.left = false
+  offRight: ->
+    if Game.playerEnabled
+      @mario.right = false
+  offUp: ->
+    if Game.playerEnabled
+      @mario.up = false
+  offDown: ->
+    if Game.playerEnabled
+      @mario.down = false
+
 
 
 $ ->
   new Game()
 
   $(window).keydown (e) ->
-    key = e.keyCode
-    if key == 38
+    if e.key == 'ArrowUp'
       game.onUp()
-    if key == 40
+    if e.key == 'ArrowDown'
       game.onDown()
-    if key == 37
+    if e.key == 'ArrowLeft'
       game.onLeft()
-    if key == 39
+    if e.key == 'ArrowRight'
       game.onRight()
 
+    if e.key == 'g'
+      game.ga.nextGenerateion()
+
   $(window).keyup (e) ->
-    key = e.keyCode
-    if key == 38
+    if e.key == 'ArrowUp'
       game.offUp()
-    if key == 40
+    if e.key == 'ArrowDown'
       game.offDown()
-    if key == 37
+    if e.key == 'ArrowLeft'
       game.offLeft()
-    if key == 39
+    if e.key == 'ArrowRight'
       game.offRight()
+
 
