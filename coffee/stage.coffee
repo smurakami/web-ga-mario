@@ -42,21 +42,6 @@ class Util
     return sum
 
 
-getUrlParameter = (sParam) ->
-  sPageURL = decodeURIComponent(window.location.search.substring(1))
-  sURLVariables = sPageURL.split('&')
-  sParameterName = undefined
-  i = undefined
-  i = 0
-  while i < sURLVariables.length
-    sParameterName = sURLVariables[i].split('=')
-    if sParameterName[0] == sParam
-      return if sParameterName[1] == undefined then true else sParameterName[1]
-    i++
-  return
-
-
-window.getUrlParameter = getUrlParameter
 
 stageData = [
   [
@@ -189,6 +174,7 @@ class Point
     return Point(x * unit + unit/2, y * unit + unit/2)
 
   toIndex: ->
+    unit = Game.unit
     x = Math.floor(@x / unit)
     y = Math.floor(@y / unit)
     return Point(x, y)
@@ -483,6 +469,7 @@ class Game
   @height: 400
   @gravity: 0.03
   @playerEnabled: false
+  @ratio: 1
 
   constructor: ->
     game = @
@@ -491,7 +478,7 @@ class Game
     if Game.playerEnabled
       @mario = new Mario()
     # @gene = new Gene()
-    @ga = new GA()
+    # @ga = new GA()
 
     @pos = Point()
 
@@ -507,6 +494,8 @@ class Game
     $('#main').append($canvas)
     @canvas = $canvas.get(0)
     ratio = Util.getRatio(@canvas)
+
+    Game.ratio = ratio
 
     @canvas.width = Game.width * ratio
     @canvas.height = Game.height * ratio
@@ -530,7 +519,7 @@ class Game
     if @right
       @pos.x += Game.unit / 20
 
-    @ga.update()
+    # @ga.update()
 
   draw: ->
     @context.clearRect(0, 0, Game.width * 2, Game.height * 2)
@@ -538,7 +527,7 @@ class Game
     if Game.playerEnabled
       @mario.draw()
     # @gene.draw()
-    @ga.draw()
+    # @ga.draw()
 
   onLeft: ->
     @left = true
@@ -578,10 +567,37 @@ class Game
 $ ->
   new Game()
 
-  data = getUrlParameter('stage')
-  if data?
-    stageData[0] = JSON.parse(data)
-    stage.data = JSON.parse(data)
+  down = false
+  $('#main').mousedown (e) ->
+    console.log e
+    down = true
+    draw(e)
+
+  $('#main').mouseup (e) ->
+    console.log e
+    down = false
+
+  $('#main').mousemove (e) ->
+    if down
+      draw(e)
+
+  mode = 1
+
+  draw = (e) ->
+    x = e.offsetX * Game.ratio + game.pos.x
+    y = e.offsetY * Game.ratio + game.pos.y
+    p = Point(x, y)
+    pi = p.toIndex()
+
+    console.log pi
+
+    stage.data[pi.y][pi.x] = mode
+
+    $('.stage_json').val JSON.stringify(stage.data)
+
+  $('.button').click ->
+    window.location = '/?stage=' + encodeURI(JSON.stringify(stage.data))
+
 
   $(window).keydown (e) ->
     if e.key == 'ArrowUp'
@@ -595,6 +611,12 @@ $ ->
 
     if e.key == 'g'
       game.ga.nextGenerateion()
+
+    if e.key == '1'
+      mode = 1
+
+    if e.key == '0'
+      mode = 0
 
   $(window).keyup (e) ->
     if e.key == 'ArrowUp'
